@@ -1,0 +1,16 @@
+services:
+  proxy-server:
+    image: node:18-alpine
+    container_name: proxy-server
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+      - "5454:5454"
+    environment:
+      - TARGET_HOST=${DB_PROXY_ENDPOINT}
+      - TARGET_PORT=5432
+      - LISTEN_PORT=5432
+    volumes:
+      - ./:/app # Mount current directory to /app in container
+    working_dir: /app # Set working directory
+    command: ["node", "server.js"] # Run server.js directly
