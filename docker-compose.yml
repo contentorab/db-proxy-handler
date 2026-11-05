@@ -1,6 +1,6 @@
 services:
   proxy-server:
-    image: node:18-alpine
+    image: node:26-alpine
     container_name: proxy-server
     restart: unless-stopped
     ports:
