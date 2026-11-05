@@ -168,8 +168,10 @@ const server = net.createServer(
   }
 );
 
-// Server configuration for high performance
-server.maxConnections = 0; // Unlimited connections
+// Server configuration for high performance.
+// Do not set maxConnections. The default is already unlimited.
+// Node 18 treated 0 as unlimited. Node 21+ treats 0 as "drop every connection",
+// so the proxy accepts the TCP handshake and then immediately closes it.
 server.timeout = 0; // No server timeout
 
 // Handle server errors with restart
